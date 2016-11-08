@@ -423,6 +423,8 @@ var nfc = {
     },
 
     addNdefListener: function (callback, win, fail) {
+        console.log('adding Ndef listener');
+
         document.addEventListener("ndef", callback, false);
         cordova.exec(win, fail, "NfcPlugin", "registerNdef", []);
     },
@@ -479,6 +481,8 @@ var nfc = {
     },
 
     removeNdefListener: function (callback, win, fail) {
+        console.log('removing Ndef listener');
+        
         document.removeEventListener("ndef", callback, false);
         cordova.exec(win, fail, "NfcPlugin", "removeNdef", []);
     },
