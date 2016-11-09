@@ -1,8 +1,5 @@
 package com.chariotsolutions.nfc.plugin;
 
-// Using ToastUtility to display debug messages to the screen. 
-import com.chariotsolutions.nfc.plugin.ToastUtility;
-
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
