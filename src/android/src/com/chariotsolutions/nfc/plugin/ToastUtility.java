@@ -1,4 +1,4 @@
-package com.accesseventsolutions.nfcencoder.util;
+package com.chariotsolutions.nfc.plugin;
 
 import android.content.Context;
 import android.widget.Toast;
