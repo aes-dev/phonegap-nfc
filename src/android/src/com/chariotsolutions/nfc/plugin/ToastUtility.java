@@ -34,7 +34,7 @@ public class ToastUtility
 
     private ToastUtility()
     {
-        toasts = new HashMap<>();
+        toasts = new HashMap<Context, Toast>();
     }
 
     /**
