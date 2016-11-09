@@ -176,9 +176,9 @@ public class NfcPlugin extends CordovaPlugin implements NfcAdapter.OnNdefPushCom
     }
 
     private void registerNdef(CallbackContext callbackContext) {
-        Log.d(TAG, "dre registerNdef...");
+        Log.d(TAG, "called registerNdef...");
         // Context context=this.cordova.getActivity().getApplicationContext();
-        ToastUtility.getInstance().showShortToast(this.cordova.getActivity().getApplicationContext(), "dre registerNdef");
+        ToastUtility.getInstance().showShortToast(this.cordova.getActivity().getApplicationContext(), "called registerNdef");
 
         addTechList(new String[]{Ndef.class.getName()});
         callbackContext.success();
@@ -423,6 +423,10 @@ public class NfcPlugin extends CordovaPlugin implements NfcAdapter.OnNdefPushCom
           removed = true;
         }
       }
+      
+      ToastUtility.getInstance().showShortToast(this.cordova.getActivity().getApplicationContext(), 
+        "removeTechFilter removed: " + removed);
+      
       return removed;
     }
 
@@ -571,6 +575,9 @@ public class NfcPlugin extends CordovaPlugin implements NfcAdapter.OnNdefPushCom
 
     private void removeFromTechList(String[] techs) {
       techLists.remove(techs);
+
+      ToastUtility.getInstance().showShortToast(this.cordova.getActivity().getApplicationContext(), 
+        "removeFromTechList techs: " + String(techs));
   }
 
     private boolean removeIntentFilter(String mimeType) throws MalformedMimeTypeException {
