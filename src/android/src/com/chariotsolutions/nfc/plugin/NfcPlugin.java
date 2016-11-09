@@ -1,5 +1,8 @@
 package com.chariotsolutions.nfc.plugin;
 
+// Using ToastUtility to display debug messages to the screen. 
+import com.accesseventsolutions.nfcencoder.util.ToastUtility;
+
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -176,14 +179,21 @@ public class NfcPlugin extends CordovaPlugin implements NfcAdapter.OnNdefPushCom
     }
 
     private void registerNdef(CallbackContext callbackContext) {
-      addTechList(new String[]{Ndef.class.getName()});
-      callbackContext.success();
-  }
+        Log.d(TAG, "dre registerNdef...");
+        Context context=this.cordova.getActivity().getApplicationContext();
+        ToastUtility.getInstance().showShortToast(context, "dre registerNdef");
+
+        addTechList(new String[]{Ndef.class.getName()});
+        callbackContext.success();
+    }
 
     private void removeNdef(CallbackContext callbackContext) {
-      removeTechList(new String[]{Ndef.class.getName()});
-      callbackContext.success();
-  }
+        Context context=this.cordova.getActivity().getApplicationContext();
+        ToastUtility.getInstance().showShortToast(context, "dre removeNdef");
+        
+        removeTechList(new String[]{Ndef.class.getName()});
+        callbackContext.success();
+    }
 
     private void unshareTag(CallbackContext callbackContext) {
         p2pMessage = null;
