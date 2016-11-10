@@ -176,8 +176,7 @@ public class NfcPlugin extends CordovaPlugin implements NfcAdapter.OnNdefPushCom
     }
 
     private void registerNdef(CallbackContext callbackContext) {
-        Log.d(TAG, "called registerNdef...");
-        // Context context=this.cordova.getActivity().getApplicationContext();
+        Log.d(TAG, "registerNdef...");
         ToastUtility.getInstance().showShortToast(this.cordova.getActivity().getApplicationContext(), "called registerNdef");
 
         addTechList(new String[]{Ndef.class.getName()});
@@ -185,7 +184,7 @@ public class NfcPlugin extends CordovaPlugin implements NfcAdapter.OnNdefPushCom
     }
 
     private void removeNdef(CallbackContext callbackContext) {
-        // Context context=this.cordova.getActivity().getApplicationContext();
+        Log.d(TAG, "removeNdef...");
         ToastUtility.getInstance().showShortToast(this.cordova.getActivity().getApplicationContext(), "dre removeNdef");
         
         removeTechList(new String[]{Ndef.class.getName()});
@@ -410,29 +409,40 @@ public class NfcPlugin extends CordovaPlugin implements NfcAdapter.OnNdefPushCom
     }
 
     private void addTechFilter() {
-      intentFilters.add(new IntentFilter(NfcAdapter.ACTION_TECH_DISCOVERED));
+        IntentFilter intentFilter = new IntentFilter(NfcAdapter.ACTION_TECH_DISCOVERED);
+        intentFilters.add(intentFilter);
+        Log.d(TAG, "addTechFilter, adding intentFilter " + intentFilter);
+        Log.d(TAG, "addTechFilter, intentFilters " + intentFilters);
+
+//        intentFilters.add(new IntentFilter(NfcAdapter.ACTION_TECH_DISCOVERED));
     }
 
     private boolean removeTechFilter() {
-      boolean removed = false;
-      Iterator<IntentFilter> iter = intentFilters.iterator();
-      while (iter.hasNext()) {
-        IntentFilter intentFilter = iter.next();
-        if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(intentFilter.getAction(0))) {
-          iter.remove();
-          removed = true;
+        Log.d(TAG, "removeTechFilter, intentFilters " + intentFilters);
+
+        boolean removed = false;
+        Iterator<IntentFilter> iter = intentFilters.iterator();
+        while (iter.hasNext()) {
+            IntentFilter intentFilter = iter.next();
+            Log.d(TAG, "removeTechFilter, intentFilter " + intentFilter);
+            if (NfcAdapter.ACTION_TECH_DISCOVERED.equals(intentFilter.getAction(0))) {
+                iter.remove();
+                removed = true;
+                Log.d(TAG, "removeTechFilter, removing intentFilter " + intentFilter);
+            }
         }
-      }
-      
-      ToastUtility.getInstance().showShortToast(this.cordova.getActivity().getApplicationContext(), 
-        "removeTechFilter removed: " + removed);
-      
-      return removed;
+
+//        ToastUtility.getInstance().showShortToast(this.cordova.getActivity().getApplicationContext(),
+//                "removeTechFilter removed DRE: " + removed);
+        Log.d(TAG, "removeTechFilter, removed " + removed);
+        Log.d(TAG, "removeTechFilter, intentFilters " + intentFilters);
+
+        return removed;
     }
 
     private void addTagFilter() {
-      intentFilters.add(new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED));
-  }
+        intentFilters.add(new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED));
+    }
 
     private boolean removeTagFilter() {
       boolean removed = false;
@@ -574,10 +584,11 @@ public class NfcPlugin extends CordovaPlugin implements NfcAdapter.OnNdefPushCom
   }
 
     private void removeFromTechList(String[] techs) {
-      techLists.remove(techs);
+        techLists.remove(techs);
 
-      ToastUtility.getInstance().showShortToast(this.cordova.getActivity().getApplicationContext(), 
-        "removeFromTechList techs: " + String(techs));
+        Log.d(TAG, "removeFromTechList, tech " + techs);
+        // ToastUtility.getInstance().showShortToast(this.cordova.getActivity().getApplicationContext(),
+            // "removeFromTechList techs: " + techs[0]);
   }
 
     private boolean removeIntentFilter(String mimeType) throws MalformedMimeTypeException {
