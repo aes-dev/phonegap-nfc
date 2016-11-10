@@ -2,6 +2,8 @@
 /*global cordova, console */
 "use strict";
 
+window.nfc_fn = function(){};
+
 function handleNfcFromIntentFilter() {
 
     // This was historically done in cordova.addConstructor but broke with PhoneGap-2.2.0.
@@ -413,22 +415,26 @@ var ndef = {
 var nfc = {
 
     addTagDiscoveredListener: function (callback, win, fail) {
-        document.addEventListener("tag", callback, false);
+        // document.addEventListener("tag", callback, false);
+        window.nfc_fn = callback;
         cordova.exec(win, fail, "NfcPlugin", "registerTag", []);
     },
 
     addMimeTypeListener: function (mimeType, callback, win, fail) {
-        document.addEventListener("ndef-mime", callback, false);
+        // document.addEventListener("ndef-mime", callback, false);
+        window.nfc_fn = callback;
         cordova.exec(win, fail, "NfcPlugin", "registerMimeType", [mimeType]);
     },
 
     addNdefListener: function (callback, win, fail) {
-        document.addEventListener("ndef", callback, false);
+        // document.addEventListener("ndef", callback, false);
+        window.nfc_fn = callback;
         cordova.exec(win, fail, "NfcPlugin", "registerNdef", []);
     },
 
     addNdefFormatableListener: function (callback, win, fail) {
-        document.addEventListener("ndef-formatable", callback, false);
+        // document.addEventListener("ndef-formatable", callback, false);
+        window.nfc_fn = callback;
         cordova.exec(win, fail, "NfcPlugin", "registerNdefFormatable", []);
     },
 
@@ -469,17 +475,20 @@ var nfc = {
     },
 
     removeTagDiscoveredListener: function (callback, win, fail) {
-        document.removeEventListener("tag", callback, false);
+        // document.removeEventListener("tag", callback, false);
+        window.nfc_fn = function(){};
         cordova.exec(win, fail, "NfcPlugin", "removeTag", []);
     },
 
     removeMimeTypeListener: function(mimeType, callback, win, fail) {
-        document.removeEventListener("ndef-mime", callback, false);
+        // document.removeEventListener("ndef-mime", callback, false);
+        window.nfc_fn = function(){};
         cordova.exec(win, fail, "NfcPlugin", "removeMimeType", [mimeType]);
     },
 
     removeNdefListener: function (callback, win, fail) {
-        document.removeEventListener("ndef", callback, false);
+        // document.removeEventListener("ndef", callback, false);
+        window.nfc_fn = function(){};
         cordova.exec(win, fail, "NfcPlugin", "removeNdef", []);
     },
 

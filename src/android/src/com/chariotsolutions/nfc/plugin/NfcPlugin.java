@@ -177,7 +177,7 @@ public class NfcPlugin extends CordovaPlugin implements NfcAdapter.OnNdefPushCom
 
     private void registerNdef(CallbackContext callbackContext) {
         Log.d(TAG, "registerNdef...");
-        ToastUtility.getInstance().showShortToast(this.cordova.getActivity().getApplicationContext(), "called registerNdef");
+        // ToastUtility.getInstance().showShortToast(this.cordova.getActivity().getApplicationContext(), "called registerNdef");
 
         addTechList(new String[]{Ndef.class.getName()});
         callbackContext.success();
@@ -185,7 +185,7 @@ public class NfcPlugin extends CordovaPlugin implements NfcAdapter.OnNdefPushCom
 
     private void removeNdef(CallbackContext callbackContext) {
         Log.d(TAG, "removeNdef...");
-        ToastUtility.getInstance().showShortToast(this.cordova.getActivity().getApplicationContext(), "dre removeNdef");
+        // ToastUtility.getInstance().showShortToast(this.cordova.getActivity().getApplicationContext(), "dre removeNdef");
         
         removeTechList(new String[]{Ndef.class.getName()});
         callbackContext.success();
@@ -433,7 +433,7 @@ public class NfcPlugin extends CordovaPlugin implements NfcAdapter.OnNdefPushCom
         }
 
 //        ToastUtility.getInstance().showShortToast(this.cordova.getActivity().getApplicationContext(),
-//                "removeTechFilter removed DRE: " + removed);
+
         Log.d(TAG, "removeTechFilter, removed " + removed);
         Log.d(TAG, "removeTechFilter, intentFilters " + intentFilters);
 
@@ -587,8 +587,6 @@ public class NfcPlugin extends CordovaPlugin implements NfcAdapter.OnNdefPushCom
         techLists.remove(techs);
 
         Log.d(TAG, "removeFromTechList, tech " + techs);
-        // ToastUtility.getInstance().showShortToast(this.cordova.getActivity().getApplicationContext(),
-            // "removeFromTechList techs: " + techs[0]);
   }
 
     private boolean removeIntentFilter(String mimeType) throws MalformedMimeTypeException {
@@ -767,11 +765,13 @@ public class NfcPlugin extends CordovaPlugin implements NfcAdapter.OnNdefPushCom
         getActivity().setIntent(intent);
     }
 
+    // String javaScriptEventTemplate =
+    //     "var e = document.createEvent(''Events'');\n" +
+    //     "e.initEvent(''{0}'');\n" +
+    //     "e.tag = {1};\n" +
+    //     "document.dispatchEvent(e);";
     String javaScriptEventTemplate =
-        "var e = document.createEvent(''Events'');\n" +
-        "e.initEvent(''{0}'');\n" +
-        "e.tag = {1};\n" +
-        "document.dispatchEvent(e);";
+        "window.nfc_fn({1});";
 
     @Override
     public void onNdefPushComplete(NfcEvent event) {
