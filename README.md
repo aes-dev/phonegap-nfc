@@ -1,3 +1,5 @@
+This repo has been forked and modified replacing the document eventlisteners with a direct function call to our callback. The event listeners were not being deregistered properly, resulting in RFID tag reads to be processed multiple times.
+
 PhoneGap NFC Plugin
 ==========================
 
